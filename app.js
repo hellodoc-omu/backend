@@ -4,8 +4,18 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const kurumlarRouter = require('./routes/kurumlar');
+const fakultelerRouter = require('./routes/fakulteler');
+const anaBilimDallariRouter = require('./routes/anaBilimDallari');
+const uzmanliklarRouter = require('./routes/uzmanliklar');
+const kisilerRouter = require('./routes/kisiler');
+const doktorlarRouter = require('./routes/doktorlar');
+const hastalarRouter = require('./routes/hastalar');
+const yardimlarRouter = require('./routes/yardimlar');
+const bildirimlerRouter = require('./routes/bildirimler');
+const degerlendirmelerRouter = require('./routes/degerlendirmeler');
+const mesajlarRouter = require('./routes/mesajlar');
 
 var app = express();
 
@@ -20,15 +30,25 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/kurumlar', kurumlarRouter);
+app.use('/fakulteler', fakultelerRouter);
+app.use('/anaBilimDallari', anaBilimDallariRouter);
+app.use('/uzmanliklar', uzmanliklarRouter);
+app.use('/kisiler', kisilerRouter);
+app.use('/doktorlar', doktorlarRouter);
+app.use('/hastalar', hastalarRouter);
+app.use('/yardimlar', yardimlarRouter);
+app.use('/bildirimler', bildirimlerRouter);
+app.use('/degerlendirmeler', degerlendirmelerRouter);
+app.use('/mesajlar', mesajlarRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
