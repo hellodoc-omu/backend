@@ -13,5 +13,5 @@ yarn
 # Up-to-server
 
 ```sh
-DEBUG=backend:* yarn start
+yarn start
 ```
