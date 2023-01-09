@@ -1,8 +1,7 @@
-const { connection } = require('../db/connection');
-connection.connect();
+const { connection } = require('../../db/connection');
 
-module.exports.selectAllColumns = (entity, res) => {
-  const SQL = `SELECT * FROM ${entity};`;
+module.exports.getHastalar = (_, res) => {
+  const SQL = `SELECT hNo, kIsim, kSoyIsim, kAvatar, kMail, kSifre, kCinsiyet, kOnline FROM Hasta INNER JOIN Kisi ON Hasta.kNo = Kisi.kNo;`;
 
   connection.query(SQL, (err, result) => {
     if (err) {

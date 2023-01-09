@@ -1,5 +1,5 @@
 const express = require('express');
-const { getFakulteler } = require('../actions/get');
+const { getFakulteler } = require('../actions/fakulteler/get');
 const router = express.Router();
 
 router.get('/', getFakulteler);

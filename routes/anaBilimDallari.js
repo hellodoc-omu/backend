@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAnaBilimDallari } = require('../actions/get');
+const { getAnaBilimDallari } = require('../actions/anaBilimDallari/get');
 const router = express.Router();
 
 router.get('/', getAnaBilimDallari);

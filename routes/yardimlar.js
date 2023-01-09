@@ -1,5 +1,5 @@
 const express = require('express');
-const { getYardimlar } = require('../actions/get');
+const { getYardimlar } = require('../actions/yardimlar/get');
 const router = express.Router();
 
 router.get('/', getYardimlar);
