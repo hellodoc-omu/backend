@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const { auth } = require('./actions/auth');
+
 const indexRouter = require('./routes/index');
 const kurumlarRouter = require('./routes/kurumlar');
 const fakultelerRouter = require('./routes/fakulteler');
@@ -29,18 +31,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/kurumlar', kurumlarRouter);
-app.use('/fakulteler', fakultelerRouter);
-app.use('/anaBilimDallari', anaBilimDallariRouter);
-app.use('/uzmanliklar', uzmanliklarRouter);
-app.use('/kisiler', kisilerRouter);
-app.use('/doktorlar', doktorlarRouter);
-app.use('/hastalar', hastalarRouter);
-app.use('/yardimlar', yardimlarRouter);
-app.use('/bildirimler', bildirimlerRouter);
-app.use('/degerlendirmeler', degerlendirmelerRouter);
-app.use('/mesajlar', mesajlarRouter);
+app.use('/', auth, indexRouter);
+app.use('/kurumlar', auth, kurumlarRouter);
+app.use('/fakulteler', auth, fakultelerRouter);
+app.use('/anaBilimDallari', auth, anaBilimDallariRouter);
+app.use('/uzmanliklar', auth, uzmanliklarRouter);
+app.use('/kisiler', auth, kisilerRouter);
+app.use('/doktorlar', auth, doktorlarRouter);
+app.use('/hastalar', auth, hastalarRouter);
+app.use('/yardimlar', auth, yardimlarRouter);
+app.use('/bildirimler', auth, bildirimlerRouter);
+app.use('/degerlendirmeler', auth, degerlendirmelerRouter);
+app.use('/mesajlar', auth, mesajlarRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

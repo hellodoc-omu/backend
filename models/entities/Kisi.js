@@ -16,6 +16,6 @@ class Kisi {
     this.kMail = kMail;
     this.kSifre = kSifre;
     this.kCinsiyet = kCinsiyet;
-    this.KOnline = KOnline;
+    this.kOnline = kOnline;
   }
 }

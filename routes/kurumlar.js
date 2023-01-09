@@ -1,5 +1,5 @@
 const express = require('express');
-const { getKurumlar } = require('../actions/get');
+const { getKurumlar } = require('../actions/kurumlar/get');
 const router = express.Router();
 
 router.get('/', getKurumlar);
