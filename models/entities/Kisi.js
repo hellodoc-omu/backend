@@ -7,7 +7,7 @@ class Kisi {
     kMail,
     kSifre,
     kCinsiyet,
-    KOnline,
+    kOnline,
   }) {
     this.kNo = kNo;
     this.kIsim = kIsim;

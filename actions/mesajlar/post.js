@@ -1,7 +1,7 @@
 const { connection } = require('../../db/connection');
-connection.connect();
-
 const moment = require('moment');
+
+connection.connect();
 
 module.exports.mesajGonder = (req, res) => {
   const { icerik, resim, dosya, dNo, dUzNo, hNo } = req.body;
@@ -23,13 +23,13 @@ module.exports.mesajGonder = (req, res) => {
     }
 
     result = {
-      status: 200,
+      status: 'success',
       data: {
         ...req.body,
         tarih,
       },
     };
 
-    res.status(result.status).json(result);
+    res.json(result);
   });
 };
