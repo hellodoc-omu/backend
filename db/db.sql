@@ -358,6 +358,17 @@ ALTER TABLE `Mesaj`
   ADD CONSTRAINT `Mesaj_ibfk_3` FOREIGN KEY (`hNo`) REFERENCES `Hasta` (`hNo`);
 COMMIT;
 
+-- yCevap sütununu güncelleme
+ALTER TABLE Yardim MODIFY COLUMN yCevap VARCHAR(1000)
+
+--Yardım tablosuna veri ekleme
+INSERT INTO Yardim(ySoru,yCevap)
+VALUES ('Uygulama yavaş çalışıyor', 'Uygulamanız yavaşlamaya başladıysa Ayarlar —> Uygulamalar & özellikler sekmesinden HelloDoc uygulamasının önbelleğini temizleyebilir, çözüme yardımcı olmadıysa telefonunuzun sistem özelliklerini gözden geçirebilir ve uygulamanın gereksinimlerini karşılayıp karşılamadığına bakabilirsiniz. Sorunun devamı halinde "Geri bildirimde bulunun" sekmesinden bize ulaşabilirsiniz.'),
+('Uygulama kendi kendine kapanıyor', 'Uygulamanız kullanım esnasında kendi kendine kapanmaya başlarsa Ayarlar —> Uygulamalar & özellikler sekmesinden uygulamayı edindiğiniz marketi seçerek, marketin önbelleğini ve verilerini temizleyin. Sorunun devamı halinde "Geri bildirimde bulunun" sekmesinden bize ulaşabilirsiniz.'),
+('Uygulama kilitleniyor', 'Eğer uygulamada kilitlenmeler yaşıyorsanız Ayarlar —> Uygulamalar & özellikler sekmesinden HelloDoc uygulamasını durdurmaya zorlayarak tekrar başlatabilirsiniz, çözüme yeterli olmazsa uygulama verisini silerek tekrardan giriş yapmayı deneyebilirsiniz. Sorunun devamı halinde "Geri bildirimde bulunun" sekmesinden bize ulaşabilirsiniz.'),
+('Ağ sorunları yaşıyorum', 'Olası ağ sorunlarında öncelikle cihazınızın bağlantısını kontrol etmelisiniz bağlantınızda aygıtınızdan kaynaklanabilecek olası bir sorun fark ettiğiniz takdirde dağıtıcı firma ile iletişime geçebilirsiniz. Çözümün aygıtınızdan kaynaklanmadığını düşünüyorsanız “Geri bildirimde bulunun” sekmesinden bize ulaşabilirsiniz.'),
+('Geri bildirimde bulunun', 'Uygulamayla ilgili sorunlarınızı hala çözemediyseniz deneyiminizi geliştirmemize yardımcı olmak için bize geri bildirimde bulunabilirsiniz. İletişime geçebileceğiniz e posta adresimiz: support.hellodoc@example.com');
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
