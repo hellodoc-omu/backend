@@ -2,13 +2,17 @@ const { connection } = require('../../db/connection');
 const { getKosullar } = require('../../utilities/utilities');
 
 const getKosulluMesajlar = (res, kosul) => {
-  const { dNo, hNo, group } = kosul;
+  const { dNo, hNo, desc } = kosul;
 
-  const SQL = `SELECT mNo, mIcerik, mResim, mDosya, mTarih, mGonderen, Mesaj.dNo, k1.kAvatar as dAvatar, k1.kIsim as dIsim, k1.kSoyIsim as dSoyIsim, k1.kOnline as dOnline, Uzmanlik.uzIsim as dUzIsim, Mesaj.hNo, k2.kAvatar as hAvatar, k2.kIsim as hIsim, k2.kSoyIsim as hSoyIsim, k2.kOnline as hOnline FROM Mesaj INNER JOIN Doktor ON Mesaj.dNo = Doktor.dNo ${
-    dNo != undefined ? `AND Mesaj.dNo=${dNo}` : ''
-  } INNER JOIN Kisi k1 ON Doktor.kNo = k1.kNo INNER JOIN Hasta ON Mesaj.hNo = Hasta.hNo INNER JOIN Kisi k2 ON Hasta.kNo = k2.kNo ${
-    hNo != undefined ? `AND Mesaj.hNo=${hNo}` : ''
-  } INNER JOIN Uzmanlik ON Mesaj.dUzNo = Uzmanlik.uzNo;`;
+  const selectedData = `m1.mNo, m1.mIcerik, m1.mResim, m1.mDosya, m1.mTarih, m1.mGonderen, m1.dNo, k1.kAvatar as dAvatar, k1.kIsim as dIsim, k1.kSoyIsim as dSoyIsim, k1.kOnline as dOnline, Uzmanlik.uzIsim as dUzIsim, m1.hNo, k2.kAvatar as hAvatar, k2.kIsim as hIsim, k2.kSoyIsim as hSoyIsim, k2.kOnline as hOnline`;
+
+  const SQL = `SELECT ${selectedData} FROM Mesaj m1 INNER JOIN Doktor ON m1.dNo = Doktor.dNo ${
+    dNo != undefined ? `AND m1.dNo=${dNo}` : ''
+  } INNER JOIN Kisi k1 ON Doktor.kNo = k1.kNo INNER JOIN Hasta ON m1.hNo = Hasta.hNo INNER JOIN Kisi k2 ON Hasta.kNo = k2.kNo ${
+    hNo != undefined ? `AND m1.hNo=${hNo}` : ''
+  } INNER JOIN Uzmanlik ON m1.dUzNo = Uzmanlik.uzNo ${
+    desc != undefined ? desc : ''
+  };`;
 
   connection.query(SQL, (err, result) => {
     if (err) {
@@ -61,6 +65,14 @@ const getKosulluMesajlar = (res, kosul) => {
 };
 
 module.exports.getMesajlar = (req, res) => {
+  const kosul = getKosullar(req.query);
+
+  kosul.desc = 'ORDER BY m1.mTarih DESC';
+
+  getKosulluMesajlar(res, kosul);
+};
+
+module.exports.getMesajlarim = (req, res) => {
   const kosul = getKosullar(req.query);
 
   getKosulluMesajlar(res, kosul);
