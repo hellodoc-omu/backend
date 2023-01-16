@@ -4,7 +4,7 @@ const { getKosullar } = require('../../utilities/utilities');
 const getKosulluMesajlar = (res, kosul) => {
   const { dNo, hNo, desc } = kosul;
 
-  const selectedData = `m1.mNo, m1.mIcerik, m1.mResim, m1.mDosya, m1.mTarih, m1.mGonderen, m1.dNo, k1.kAvatar as dAvatar, k1.kIsim as dIsim, k1.kSoyIsim as dSoyIsim, k1.kOnline as dOnline, Uzmanlik.uzIsim as dUzIsim, m1.hNo, k2.kAvatar as hAvatar, k2.kIsim as hIsim, k2.kSoyIsim as hSoyIsim, k2.kOnline as hOnline`;
+  const selectedData = `m1.mNo, m1.mIcerik, m1.mResim, m1.mDosya, m1.mTarih, m1.mGonderen, m1.dNo, m1.dUzNo, k1.kAvatar as dAvatar, k1.kIsim as dIsim, k1.kSoyIsim as dSoyIsim, k1.kOnline as dOnline, Uzmanlik.uzIsim as dUzIsim, m1.hNo, k2.kAvatar as hAvatar, k2.kIsim as hIsim, k2.kSoyIsim as hSoyIsim, k2.kOnline as hOnline`;
 
   const SQL = `SELECT ${selectedData} FROM Mesaj m1 INNER JOIN Doktor ON m1.dNo = Doktor.dNo ${
     dNo != undefined ? `AND m1.dNo=${dNo}` : ''
@@ -26,13 +26,14 @@ const getKosulluMesajlar = (res, kosul) => {
 
     const res_data = result.map((mesaj) => {
       const { mNo, mIcerik, mResim, mDosya, mTarih, mGonderen } = mesaj;
-      const { dNo, dAvatar, dIsim, dSoyIsim, dOnline, dUzIsim } = mesaj;
+      const { dNo, dAvatar, dIsim, dSoyIsim, dOnline, dUzNo, dUzIsim } = mesaj;
       const { hNo, hAvatar, hIsim, hSoyIsim, hOnline } = mesaj;
 
       const doktor = {
         no: dNo,
         avatar: dAvatar,
         isimSoyisim: `${dIsim} ${dSoyIsim}`,
+        dUzNo,
         ilgiliUzmanlik: dUzIsim,
         online: dOnline,
       };
