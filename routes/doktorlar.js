@@ -1,7 +1,8 @@
 const express = require('express');
-const { getDoktorlar } = require('../actions/doktorlar/get');
+const { getDoktorlar, getDoktorById } = require('../actions/doktorlar/get');
 const router = express.Router();
 
 router.get('/', getDoktorlar);
+router.get('/:id', getDoktorById);
 
 module.exports = router;
